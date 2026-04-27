@@ -6,7 +6,8 @@ downstream consumption by the futPuzzle video pipeline. No upstream source
 files are modified beyond the addition of empty `__init__.py` markers in the
 existing `model/`, `utils/`, and `config/` directories (so `find_packages`
 discovers them) and a thin `pnlcalib/` shim package re-exporting upstream
-symbols.
+symbols. ``package_data`` ships the YAML HRNet configs alongside the
+``config`` package so the adapter can read them after pip install.
 """
 from setuptools import setup, find_packages
 
@@ -28,6 +29,8 @@ setup(
             "config", "config.*",
         ]
     ),
+    package_data={"config": ["*.yaml", "*.yml"]},
+    include_package_data=True,
     python_requires=">=3.10",
     install_requires=[
         "torch",
