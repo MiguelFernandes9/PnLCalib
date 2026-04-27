@@ -38,5 +38,9 @@ setup(
         "tqdm",
         "lsq-ellipse",
         "scikit-learn",
+        "scipy",
+        "shapely",
+        "pyyaml",
+        "pillow",
     ],
 )
