@@ -3,21 +3,31 @@
 Forked from mguti97/PnLCalib (GPL-2.0). This shim is added solely to enable
 `pip install git+https://github.com/MiguelFernandes9/PnLCalib@<sha>` for
 downstream consumption by the futPuzzle video pipeline. No upstream source
-files are modified.
+files are modified beyond the addition of empty `__init__.py` markers in the
+existing `model/`, `utils/`, and `config/` directories (so `find_packages`
+discovers them) and a thin `pnlcalib/` shim package re-exporting upstream
+symbols.
 """
 from setuptools import setup, find_packages
 
 
 setup(
     name="pnlcalib",
-    version="0.0.0+fork.1",
+    version="0.0.0+fork.2",
     description="Pip-installable shim over mguti97/PnLCalib (GPL-2.0).",
     long_description=__doc__,
     long_description_content_type="text/plain",
     url="https://github.com/MiguelFernandes9/PnLCalib",
     license="GPL-2.0",
     py_modules=["inference", "train", "train_l", "eval_wp"],
-    packages=find_packages(include=["model", "model.*", "utils", "utils.*", "config", "config.*"]),
+    packages=find_packages(
+        include=[
+            "pnlcalib", "pnlcalib.*",
+            "model", "model.*",
+            "utils", "utils.*",
+            "config", "config.*",
+        ]
+    ),
     python_requires=">=3.10",
     install_requires=[
         "torch",
